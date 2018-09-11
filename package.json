@@ -70,6 +70,9 @@
     "testEnvironment": "node",
     "testRegex": "(__tests__/.*\\.test.js)$"
   },
+  "files": [
+    "dist"
+  ],
   "engines": {
     "node": ">=6.10"
   }
