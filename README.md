@@ -8,6 +8,12 @@ The goal of this projet is to deliver a Controller component, for a Node.js envi
 
 **Note:** The package supports both `express` and `koa` libraries.
 
+### Install
+
+```
+npm i glue-controller --save-prod
+```
+
 ### Basic usage and setup
 
 ```js
