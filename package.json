@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "Simple controller (MVC pattern) for Node.js that works with Express or Koa",
   "main": "dist/index.js",
-  "module": "src/index.js",
   "scripts": {
+    "clean": "rimraf dist",
+    "build:main": "mkdir dist && babel src -d dist",
+    "build": "run-s test clean build:main",
     "test": "jest --runInBand --forceExit --detectOpenHandles",
     "run-express-example": "nodemon --exec babel-node --debug --inspect=9229 examples/express.js",
     "run-koa-example": "nodemon --exec babel-node --debug --inspect=9229 examples/koa.js",
