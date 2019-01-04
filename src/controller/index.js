@@ -1,5 +1,4 @@
 import { getControllerPath, recurseActions } from './helpers';
-import kebabCase from 'just-kebab-case';
 
 class Controller {
   constructor({ router }) {
