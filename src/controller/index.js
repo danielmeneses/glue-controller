@@ -2,12 +2,11 @@ import { getControllerPath, recurseActions } from './helpers';
 import kebabCase from 'just-kebab-case';
 
 class Controller {
-  constructor({ prefix = '', router }) {
-    this._prefix = prefix ? kebabCase(prefix) : '';
+  constructor({ router }) {
     this._controllerPath = getControllerPath(this.constructor.name);
     this._router = router;
 
-    recurseActions(this, this._controllerPath, this._prefix);
+    recurseActions(this, this._controllerPath, this.constructor.prefix);
   }
 
   getControllerPath() {
@@ -18,8 +17,11 @@ class Controller {
     return this._router;
   }
 
-  getPrefix() {
-    return this._prefix;
+  /**
+   * User implementation
+   */
+  get prefix() {
+    return null;
   }
 
   getControllerName() {

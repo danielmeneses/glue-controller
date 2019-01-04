@@ -23,6 +23,10 @@ class FoobarController extends Controller {
   actionQux() {}
   actionWaldo() {}
   quuxPatch() {}
+
+  static get prefix() {
+    return 'waldo-prefix';
+  }
 }
 
 // extended controller class
@@ -38,6 +42,10 @@ class FoobizController extends FoobarController {
   actionFoo() {}
   customFoo() {}
   helperFunction() {}
+
+  static get prefix() {
+    return null;
+  }
 }
 
 describe('Express - test Controller class', () => {
@@ -53,7 +61,7 @@ describe('Express - test Controller class', () => {
 
   it('should return all existing routes based on the actions names in the FoobarController', () => {
     {
-      new FoobarController({ prefix: 'waldo-prefix', router });
+      new FoobarController({ router });
 
       const routers = router.stack;
       const routersData = routers.map(route => {
@@ -156,7 +164,7 @@ describe('Express - test Controller class', () => {
 
     expect(fooController.getControllerName()).toEqual('FoobarController');
     expect(fooController.getControllerPath()).toEqual('foobar');
-    expect(fooController.getPrefix()).toEqual('');
+    expect(FoobarController.prefix).toEqual('waldo-prefix');
     expect(fooController.getRouter()).toEqual(router);
   });
 });

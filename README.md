@@ -64,14 +64,14 @@ class SiteController extends Controller {
       {
         method: 'PATCH',
         delegate: 'updateProduct',
-        route: '/site/products/:id'
+        path: '/site/products/:id'
       }
     ],
     deleteProduct: [
       {
         method: 'DELETE',
         middlewares: [beforeDeleteMidleware],
-        route: '/site/product/:id'
+        path: '/site/product/:id'
       }
     ]
   };
