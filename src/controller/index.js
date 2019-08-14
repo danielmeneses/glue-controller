@@ -1,7 +1,8 @@
 import { getControllerPath, recurseActions } from './helpers';
 
 class Controller {
-  constructor({ router }) {
+  constructor({ router, debugMode = false } = {}) {
+    this.debugMode = debugMode;
     this._controllerPath = getControllerPath(this.constructor.name);
     this._router = router;
 

@@ -50,9 +50,10 @@ const registerRouter = (controller, action, defaultPath) => {
       const middlewares = item.middlewares || [];
       const routeAction = item.delegate || action;
 
-      logger.info(
-        `${method} ${path} => ${controller.getControllerName()}::${routeAction}`
-      );
+      if (controller.debugMode === true)
+        logger.info(
+          `${method} ${path} => ${controller.getControllerName()}::${routeAction}`
+        );
 
       routerObj[method].apply(routerObj, [
         path,
@@ -65,9 +66,10 @@ const registerRouter = (controller, action, defaultPath) => {
   }
 
   if (isAction(controller[action], action)) {
-    logger.info(
-      `${defaultMethod} ${defaultPath} => ${controller.getControllerName()}::${action}`
-    );
+    if (controller.debugMode === true)
+      logger.info(
+        `${defaultMethod} ${defaultPath} => ${controller.getControllerName()}::${action}`
+      );
 
     routerObj[defaultMethod].apply(routerObj, [
       defaultPath,
@@ -78,7 +80,9 @@ const registerRouter = (controller, action, defaultPath) => {
 };
 
 export const recurseActions = (controllerObj, controllerPath, prefix) => {
-  logger.info('########### %s', controllerObj.getControllerName());
+  if (controllerObj.debugMode === true)
+    logger.info('########### %s', controllerObj.getControllerName());
+
   const registeredRoutes = [];
   const recurse = obj => {
     const _prototype = Object.getPrototypeOf(obj);
