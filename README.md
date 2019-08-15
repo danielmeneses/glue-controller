@@ -27,11 +27,11 @@ class ProductController extends Controller {
   };
 
   actionList(req, res) {
-    res.send('Response for "GET /admin/product/list"');
+    res.send('Response for "GET /product/list"');
   }
 
   actionCreate(req, res) {
-    res.send('Response for "POST /admin/product/create"');
+    res.send('Response for "POST /product/create"');
   }
 }
 
@@ -39,7 +39,7 @@ class ProductController extends Controller {
 const app = express();
 const router = express.Router();
 
-new ProductsController({ router, prefix: 'admin' });
+new ProductsController({ router });
 
 app.use(router);
 app.listen(3000);
@@ -57,27 +57,33 @@ class SiteController extends Controller {
   static middlewares = [authenticationMiddleware];
 
   // routing configuration
-  static routesMap = {
-    actionProducts: [
-      { method: 'GET' },
-      { method: 'POST', delegate: 'createProduct' },
-      {
-        method: 'PATCH',
-        delegate: 'updateProduct',
-        path: '/site/products/:id'
-      }
-    ],
-    deleteProduct: [
-      {
-        method: 'DELETE',
-        middlewares: [beforeDeleteMidleware],
-        path: '/site/product/:id'
-      }
-    ]
-  };
+  static get routesMap() {
+		return {
+      actionProducts: [
+        { method: 'GET' },
+        { method: 'POST', delegate: 'createProduct' },
+        {
+          method: 'PATCH',
+          delegate: 'updateProduct',
+          path: `${this.prefix}/product/:id`
+        }
+      ],
+      deleteProduct: [
+        {
+          method: 'DELETE',
+          middlewares: [beforeDeleteMidleware],
+          path: `${this.prefix}/product/:id`
+        }
+      ]
+    };
+  }
+
+  static get prefix() {
+		return '/site';
+	}
 
   actionProducts(req, res) {
-    res.send('Response for "GET /site/products"');
+    res.send('Response for "GET /products"');
   }
 
   createProduct(req, res) {
@@ -91,7 +97,6 @@ class SiteController extends Controller {
   deleteProduct() {
     res.send('Response for "POST /site/product/:id"');
   }
-
 }
 ```
 
