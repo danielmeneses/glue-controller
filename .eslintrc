@@ -1,12 +1,11 @@
 {
   "parserOptions": {
     "sourceType": "module",
-    "ecmaVersion": 2017,
+    "ecmaVersion": 2023,
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true
     }
   },
-  "parser": "babel-eslint",
   "env": {
     "es6": true,
     "node": true,

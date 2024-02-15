@@ -1,6 +1,6 @@
-import { getControllerPath, recurseActions } from './helpers';
+import { getControllerPath, recurseActions } from './helpers.js';
 
-class Controller {
+export default class Controller {
   constructor({ router, debugMode = false } = {}) {
     this.debugMode = debugMode;
     this._controllerPath = getControllerPath(this.constructor.name);
@@ -28,5 +28,3 @@ class Controller {
     return this.constructor.name;
   }
 }
-
-export default Controller;

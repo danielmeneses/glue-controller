@@ -1,7 +1,7 @@
-import Controller from '../src/';
+import Controller from '../src/index.js';
 import Koa from 'koa';
 import Router from 'koa-router';
-import logger from '../src/utils/logger';
+import logger from '../src/utils/logger.js';
 
 class MainController extends Controller {
   actionHere(ctx) {
@@ -15,9 +15,9 @@ class MyController extends MainController {
     testPost: [
       {
         method: 'POST',
-        path: `/my/post/:id`
-      }
-    ]
+        path: `/my/post/:id`,
+      },
+    ],
   };
 
   actionTest(ctx) {
