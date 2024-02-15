@@ -1,6 +1,6 @@
-import Controller from '../src/';
+import Controller from '../src/index.js';
 import express from 'express';
-import logger from '../src/utils/logger';
+import logger from '../src/utils/logger.js';
 
 class MainController extends Controller {
   actionHere(req, res) {
@@ -16,23 +16,23 @@ class MyController extends MainController {
           (r, s, n) => {
             logger.info('This a middleware!!');
             n();
-          }
+          },
         ],
-        path: '/my/here-we-go'
-      }
+        path: '/my/here-we-go',
+      },
     ],
     actionTestPost: [
       {
         method: 'POST',
-        path: `/my/post/:id`
-      }
+        path: `/my/post/:id`,
+      },
     ],
     anotherAction: [
       {
         method: 'get',
-        path: `/another/action`
-      }
-    ]
+        path: `/another/action`,
+      },
+    ],
   };
 
   actionTest(req, res) {

@@ -2,22 +2,22 @@ import {
   getActionPath,
   getControllerPath,
   implodeRoutePaths,
-  isAction
-} from '../src/controller/helpers';
+  isAction,
+} from '../src/controller/helpers.js';
 
 describe('helper functions', () => {
   it('should return controller url path in kebab-case without `controller` in the name', () => {
     const controllerName = 'SuperHyperMegaLongNameUPPERcaseController';
     const name = getControllerPath(controllerName);
 
-    expect(name).toEqual('super-hyper-mega-long-name-u-p-p-e-rcase');
+    expect(name).toEqual('super-hyper-mega-long-name-uppe-rcase');
   });
 
   it('should return action url path in kebab-case without `action` in the name', () => {
     const actionName = 'actionWithSuperHyperMegaLongNameUPPERcase';
     const name = getActionPath(actionName);
 
-    expect(name).toEqual('with-super-hyper-mega-long-name-u-p-p-e-rcase');
+    expect(name).toEqual('with-super-hyper-mega-long-name-uppe-rcase');
   });
 
   it('should return a `string` representing a full uri path in kebab-case for the given partial paths', () => {

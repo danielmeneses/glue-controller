@@ -1,5 +1,5 @@
 import kebabCase from 'just-kebab-case';
-import logger from '../utils/logger';
+import logger from '../utils/logger.js';
 
 export const isAction = (obj, name) => {
   if (typeof obj !== 'function') return false;
@@ -7,7 +7,7 @@ export const isAction = (obj, name) => {
   const nameKebabFormat = kebabCase(name);
   const splittedName = nameKebabFormat.split('-');
 
-  return splittedName.length > 1 && splittedName[0] === 'action' ? true : false;
+  return splittedName.length > 1 && splittedName[0] === 'action';
 };
 
 export const implodeRoutePaths = (...paths) => {
@@ -23,11 +23,11 @@ export const implodeRoutePaths = (...paths) => {
   return path;
 };
 
-export const getActionPath = name => {
+export const getActionPath = (name) => {
   return kebabCase(name).replace(/^action-/, '');
 };
 
-export const getControllerPath = name => {
+export const getControllerPath = (name) => {
   return kebabCase(name).replace(/-controller$/, '');
 };
 
@@ -42,9 +42,9 @@ const registerRouter = (controller, action, defaultPath) => {
   if (
     routesMap &&
     typeof routesMap === 'object' &&
-    routesMap.hasOwnProperty(action)
+    Object.hasOwn(routesMap, action)
   ) {
-    routesMap[action].forEach(item => {
+    routesMap[action].forEach((item) => {
       const path = item.path || defaultPath;
       const method = (item.method || defaultMethod).toLowerCase();
       const middlewares = item.middlewares || [];
@@ -52,13 +52,13 @@ const registerRouter = (controller, action, defaultPath) => {
 
       if (controller.debugMode === true)
         logger.info(
-          `${method} ${path} => ${controller.getControllerName()}::${routeAction}`
+          `${method} ${path} => ${controller.getControllerName()}::${routeAction}`,
         );
 
       routerObj[method].apply(routerObj, [
         path,
         ...[...controllerMiddlewares, ...middlewares],
-        controller[routeAction]
+        controller[routeAction],
       ]);
     });
 
@@ -68,13 +68,13 @@ const registerRouter = (controller, action, defaultPath) => {
   if (isAction(controller[action], action)) {
     if (controller.debugMode === true)
       logger.info(
-        `${defaultMethod} ${defaultPath} => ${controller.getControllerName()}::${action}`
+        `${defaultMethod} ${defaultPath} => ${controller.getControllerName()}::${action}`,
       );
 
     routerObj[defaultMethod].apply(routerObj, [
       defaultPath,
       ...controllerMiddlewares,
-      controller[action]
+      controller[action],
     ]);
   }
 };
@@ -84,7 +84,7 @@ export const recurseActions = (controllerObj, controllerPath, prefix) => {
     logger.info('########### %s', controllerObj.getControllerName());
 
   const registeredRoutes = [];
-  const recurse = obj => {
+  const recurse = (obj) => {
     const _prototype = Object.getPrototypeOf(obj);
     const keys = Object.getOwnPropertyNames(_prototype);
 
@@ -95,7 +95,7 @@ export const recurseActions = (controllerObj, controllerPath, prefix) => {
         const routePath = implodeRoutePaths(
           prefix,
           controllerPath,
-          getActionPath(key)
+          getActionPath(key),
         );
 
         if (registeredRoutes.indexOf(key) === -1) {
