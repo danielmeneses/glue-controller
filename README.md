@@ -4,7 +4,7 @@
 
 ## Goal
 
-The goal of this projet is to deliver a Controller component, for a Node.js environemt, that can be used in a similar way as to a classic MVC framework.
+The goal of this project is to deliver a Controller component, for a Node.js environment, that can be used in a similar way as to a classic MVC framework.
 
 **Note:** The package supports both `express` and `koa` libraries.
 
@@ -45,7 +45,7 @@ app.use(router);
 app.listen(3000);
 ```
 
-As you can see the above example, the routes path are automatically set by the library based on the given `prefix` (if setted), the controller name and followed by the action name. This feature that is present in a lot of MVC frameworks out there and that keep the application easy to follow through and less verbose.
+As you can see the above example, the routes path are automatically set by the library based on the given `prefix` (if set), the controller name, followed by the action name. This feature that is present in a lot of MVC frameworks out there and that keep the application easy to follow through and less verbose.
 It's possible to change this behavior as explained bellow.
 
 ### Advanced usage
@@ -104,14 +104,14 @@ As mentioned before, any method declared in the `Controller` class, that starts 
 
 You can make use of the static property `routesMap` (`object` type) to configure existing actions or to create new ones. It's importante to note that **all the keys must directly match a specific method name declared in the class**.
 
-As demonstrated in the example above you can mention directly a declared method that doesn't start with `action`. The only difference is that in a non-action name, eg.: `deleteProduct` the route is not automatically set for you, so you always need to set one. None of the approaches is better than other and it's encouraged to interchange the use as needed.
+As demonstrated in the example above you can mention directly a declared method that doesn't start with `action`. The only difference is that in a non-action name, eg.: `deleteProduct` the route is not automatically set for you, so you always need to set one. No one approach is better than any other, and it's encouraged to interchange the use as needed.
 
 
 ## Controller properties
 
 | Name              | Type     | Visibility | Description                                                                                                        |
 |-------------------|----------|-------------|--------------------------------------------------------------------------------------------------------------------|
-| `routesMap`         | object   | public static      | Routes configuration. All keys must directlly reference a method declared in the controller (more details bellow). |
+| `routesMap`         | object   | public static      | Routes configuration. All keys must directly reference a method declared in the controller (more details below). |
 | `middlewares`       | array   | public static      | List of middlewares that will run in every action defined in the controller.                                       |
 | `getControllerPath` | function | public      | returns the partial controller path (Controller name in kebab-case).                                               |
 | `getRouter`         | function | public      | returns the router object (express or koa router).                                                                 |
